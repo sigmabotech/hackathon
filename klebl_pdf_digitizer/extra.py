@@ -28,11 +28,11 @@ class PlankopfExtractor:
     def parse_plankopf_text(self, text):
         """Parse text to extract required fields using patterns from actual PDF"""
         extracted_data = self.required_fields.copy()
-        
+
         # Find the main measurements line
         measurements_pattern = r'(\d+-\d+)\s+(\d+)\s+([\d,.]+)\s+([\d,.]+)\s+([\d,.]+)\s+([\d,.]+)\s+([\d,.]+)'
         measurements_match = re.search(measurements_pattern, text)
-        
+
         if measurements_match:
             extracted_data['Fertigteil Position'] = measurements_match.group(1)
             extracted_data['Stück'] = int(measurements_match.group(2))
@@ -66,15 +66,15 @@ class PlankopfExtractor:
         """Format the extracted data as a table"""
         if not data:
             return "No data extracted"
-            
+
         max_key_length = max(len(key) for key in data.keys())
         formatted_output = []
-        
+
         for key, value in data.items():
             if value is None:
                 value = '-'
             formatted_output.append(f"{key:<{max_key_length}} | {value}")
-            
+
         return "\n".join(formatted_output)
 
 def process_pdf(pdf_path):
@@ -84,6 +84,6 @@ def process_pdf(pdf_path):
     return extractor.format_output(data)
 
 if __name__ == "__main__":
-    pdf_path = "data\FT_XX_07-101_b_F.pdf"  # Update this path to your PDF
+    pdf_path = "data\FT_XX_07-101_b_F.pdf"  
     result = process_pdf(pdf_path)
     print(result)
