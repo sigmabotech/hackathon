@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLEBL PDF Digitizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>KLEBL PDF Digitizer</h1>
+    </header>
+
+    <main>
+        <section class="upload-section">
+            <h2>PDF Planunterlagen Upload</h2>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="componentType">Bauteilgruppe:</label>
+                    <select id="componentType" name="componentType" required>
+                        <option value="01">01 Pfetten</option>
+                        <option value="02">02 Binder</option>
+                        <option value="03">03 Riegel</option>
+                        <option value="06">06 Rippenplatten</option>
+                        <option value="07">07 Unterzüge</option>
+                        <option value="08">08 Stützen</option>
+                        <option value="09">09 Wände</option>
+                        <option value="10">10 Sandwich-Wände</option>
+                        <option value="11">11 Vorgehängte Fassade</option>
+                        <option value="13">13 Sandwich Fundamentriegel</option>
+                        <option value="14">14 Treppen</option>
+                        <option value="15">15 Podeste</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pdfFile">PDF Datei auswählen:</label>
+                    <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" required>
+                </div>
+
+                <button type="submit">Hochladen und Verarbeiten</button>
+            </form>
+        </section>
+
+        <section class="results-section">
+            <h2>Extrahierte Daten</h2>
+            <div id="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 KLEBL GmbH</p>
+    </footer>
+</body>
+</html>
