@@ -1,4 +1,12 @@
+import os
 import google.generativeai as genai
+
+def configure_gemini():
+    """Configure Gemini API with environment variable."""
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise ValueError("GEMINI_API_KEY environment variable not set")
+    genai.configure(api_key=api_key)
 
 def upload_to_gemini(path, mime_type="image/png"):
     """Uploads the given file to Gemini."""
@@ -6,68 +14,99 @@ def upload_to_gemini(path, mime_type="image/png"):
     print(f"Uploaded file '{file.display_name}' as: {file.uri}")
     return file
 
-def read_prompt_file(file_path):
-    """Reads the contents of a prompt file."""
-    with open(file_path, "r") as f:
-        prompt = f.read().strip()
-    return prompt
-
-def extract_structured_data(image_file):
-    """Extract structured data from the image using the Gemini API."""
-    # Configure Gemini API
-    genai.configure(api_key="AIzaSyA_TXvuJYCkKHBEO4hzuffe6RB09P7PdpA")
-    
-    # Upload file
-    gemini_file = upload_to_gemini(image_file)
-
-    # Configure the generation model
+def get_model():
+    """Create and configure the Gemini model."""
     generation_config = {
-        "temperature": 1,
+        "temperature": 0.75,
         "top_p": 0.95,
         "top_k": 40,
         "max_output_tokens": 8192,
         "response_mime_type": "application/json",
     }
 
-    model = genai.GenerativeModel(
+    system_instruction = """You are an AI trained to process construction-related documents. 
+            Extract the following information from the text below into a structured JSON format:
+
+            - Plankopf: (it is in bottom right corner of the photo) 
+                - Planschlüssel (Plan ID)
+                - Stat.Pos
+                - Auft. Nr
+                - Index (You can get this from the planschlussel string as the  before last alphabet)
+                - Fertigteil Position
+                - Stück
+                - Volumen (m3)
+                - Gewicht (to)
+Return only the JSON object, structured like this:
+            {
+                "Plankopf": {{
+                    "Planschlüssel": "",
+                    "Stat.Pos": "",
+                    "Auftr. Nr":"",
+                    "Index":"",
+                    "Fertigteil Position":"",
+                    "Stück": 0,
+                    "Volumen (m3)": 0.0,
+                    "Gewicht (to)": 0.0
+                }}
+}
+"""
+
+    return genai.GenerativeModel(
         model_name="gemini-2.0-flash-exp",
         generation_config=generation_config,
+        system_instruction=system_instruction,
     )
 
-    # Start a chat session
-    prompt_text = read_prompt_file("prompt.txt")
-    history = [
-        {
-            "role": "user",
-            "parts": [
-                gemini_file,
-                prompt_text,
-            ],
-        }
-    ]
-    chat_session = model.start_chat(history=history)
-    response = chat_session.send_message("Please process the uploaded image.")
+def process_plankopf_image(image_path):
+    """
+    Process a plankopf image using Gemini API and return structured JSON data.
     
-    
+    Args:
+        image_path (str): Path to the plankopf image file
+        
+    Returns:
+        str: JSON response from Gemini
+    """
+    try:
+        # Configure Gemini
+        configure_gemini()
+        
+        # Upload the image
+        image_file = upload_to_gemini(image_path)
+        
+        # Get the model
+        model = get_model()
+        
+        # Initialize chat with historical context
+        chat_session = model.start_chat(
+            history=[
+                {
+                    "role": "user",
+                    "parts": [image_file],
+                }
+            ]
+        )
+        
+        # Get response
+        response = chat_session.send_message("Please process this plankopf image.")
+        
+        return response.text
+        
+    except Exception as e:
+        print(f"Error processing plankopf image: {str(e)}")
+        raise
 
-    # Send a message to get a response
-    response = chat_session.send_message("Please process the uploaded image.")
-<<<<<<< HEAD:plancir/fullimgf.py
-    print("Extracted Data:\n", response.text)
-    return response.text
-=======
-    print("Extracted Data:\n", response.text.encode('utf-8').decode('utf-8'))
-    # Decode the response properly
-    return response.text.encode('utf-8').decode('utf-8')
+def main():
+    """Main function for testing."""
+    try:
+        # Example usage
+        image_path = "plankopf.png"
+        result = process_plankopf_image(image_path)
+        print("Processed Result:")
+        print(result)
+        
+    except Exception as e:
+        print(f"Error in main: {str(e)}")
 
-# Main script
 if __name__ == "__main__":
-    pdf_path = r"uploads\FT_XX_13-005_e_F.pdf"
-    output_image_path = pdf_to_image(pdf_path)
-
-    # Extract structured data from the image
-    structured_data = extract_structured_data(output_image_path)
-
-    # Output structured JSON
-    print("Structured JSON Output:", structured_data)
->>>>>>> 80a1e0fb0803fe9a752b634ee7d717998cce43a7:main.py
+    main()
