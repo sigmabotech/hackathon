@@ -5,7 +5,7 @@ import os
 import json
 
 # Import all specialized processing modules
-from fullimgf import extract_structured_data
+from fullimgf import process_plankopf_image
 from plankimg import process_plankopf_image
 from draufsicht import process_draufsicht_image
 from einbauteile import process_einbauteile_image
@@ -46,7 +46,7 @@ def process_images_with_fallback(image_path, model_path):
         boxes = result.boxes
         
         if len(boxes) != 5:
-            return extract_structured_data(image_path)
+            return process_plankopf_image(image_path)
         
         # Store results by class name
         results_by_class = {}
@@ -86,7 +86,7 @@ def process_images_with_fallback(image_path, model_path):
             
     except Exception as e:
         print(f"Error in processing: {str(e)}")
-        return extract_structured_data(image_path)
+        return process_plankopf_image(image_path)
 
 def main(pdf_path, model_path):
     """Main function to orchestrate the entire process."""
@@ -105,7 +105,7 @@ def main(pdf_path, model_path):
         return None
 
 if __name__ == "__main__":
-    PDF_PATH = r"uploads\FT_XX_13-006_e_F.pdf"
+    PDF_PATH = r"plancir\FT_XX_09-001_a_F.pdf"
     MODEL_PATH = "bestmodel.onnx"
     result = main(PDF_PATH, MODEL_PATH)
     

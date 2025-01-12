@@ -1,44 +1,34 @@
 {
   "Plankopf": {
-    "Planschlüssel": "FT_XX_13-006_e_F",
+    "Planschlüssel": "FT_XX_09-001_a_F",
     "Stat.Pos": "-",
     "Auftr. Nr": "819-19",
-    "Index": "e",
-    "Fertigteil Position": "13-006",
-    "Stück": 1,
-    "Volumen (m3)": 3.65,
-    "Gewicht (to)": 9.13
+    "Index": "a",
+    "Fertigteil Position": "09-001",
+    "Stück": 3,
+    "Volumen (m3)": 3.97,
+    "Gewicht (to)": 9.92
   },
   "Liste_Einbauteile": [
     {
-      "Pos": "03-7158",
-      "Stck": 1,
-      "Bezeichnung": "Perimeterdämmung XPS; d=10am; 20.30m2"
-    },
-    {
-      "Pos": "1286",
+      "Pos": "1209",
       "Stck": 2,
-      "Bezeichnung": "PHILIPP Gewindestabanker RD42-8,0to Zulagebewehrung nach Herstellervorgaben"
+      "Bezeichnung": "Kugelkopf-Stabanker 750-7,5to; Zulagebewehrung nach Herstellerangaben"
     },
     {
       "Pos": "2024",
       "Stck": 2,
-      "Bezeichnung": "Ankerschiene 38/17 L-15cm verzinkt"
+      "Bezeichnung": "Ankerschiene 38/17 L=15cm verzinkt"
     },
     {
-      "Pos": "SE01",
-      "Stck": 1,
-      "Bezeichnung": "SPA-1-07-220"
-    },
-    {
-      "Pos": "SE02",
+      "Pos": "4062",
       "Stck": 4,
-      "Bezeichnung": "SPA-2-07-220"
+      "Bezeichnung": "Philipp Power Duo-Schiene h=70mm, L=1.25m"
     },
     {
-      "Pos": "SE03",
-      "Stck": 33,
-      "Bezeichnung": "Verbundnadeln VN-04-220-44"
+      "Pos": "5003-20",
+      "Stck": 3,
+      "Bezeichnung": "Hüllwellrohr D=50mm L=20cm"
     }
   ],
   "Liste_Stahl": [
@@ -51,106 +41,36 @@
     },
     {
       "Pos": "2",
-      "Anzahl": "10",
-      "Ø": "16",
-      "Länge": 5.24,
+      "Anzahl": "4",
+      "Ø": "12",
+      "Länge": 6.46,
       "Bemerkung": ""
     },
     {
       "Pos": "3",
       "Anzahl": "4",
       "Ø": "12",
-      "Länge": 3.71,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "4",
-      "Anzahl": "9",
-      "Ø": "8",
-      "Länge": 0.86,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "5",
-      "Anzahl": "9",
-      "Ø": "8",
-      "Länge": 1.28,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "6",
-      "Anzahl": "4",
-      "Ø": "12",
-      "Länge": 3.49,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "7",
-      "Anzahl": "2",
-      "Ø": "16",
-      "Länge": 4.8,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "8",
-      "Anzahl": "8",
-      "Ø": "10",
-      "Länge": 0.6,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "9",
-      "Anzahl": "2",
-      "Ø": "10",
-      "Länge": 6.19,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "10",
-      "Anzahl": "4",
-      "Ø": "10",
-      "Länge": 3.69,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "11",
-      "Anzahl": "2",
-      "Ø": "10",
-      "Länge": 4.2,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "50",
-      "Anzahl": "4",
-      "Ø": "16",
-      "Länge": 1.28,
-      "Bemerkung": ""
-    },
-    {
-      "Pos": "51",
-      "Anzahl": "2",
-      "Ø": "16",
-      "Länge": 2.08,
+      "Länge": 3.46,
       "Bemerkung": ""
     }
   ],
   "Vorderansicht": {
     "Bauteil": {
-      "Länge_Gesamt": "6.29",
-      "Höhe_Gesamt": "3.23"
+      "Länge_Gesamt": "6.66",
+      "Höhe_Gesamt": "2.98"
     },
     "Ausklinkung_links": {
-      "Länge": "1.00",
-      "Höhe": "0.49"
+      "Länge": "1.03",
+      "Höhe": "1.25"
     },
     "Ausklinkung_rechts": {
-      "Länge": "1.00",
-      "Höhe": "0.49"
+      "Länge": "1.03",
+      "Höhe": "1.25"
     }
   },
   "Seitenansicht_Draufsicht": {
     "Bauteil": {
-      "Breite": 34.0
+      "Breite": 20.0
     }
   }
 }
