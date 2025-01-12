@@ -1,19 +1,5 @@
-import fitz
-import os
 import google.generativeai as genai
 
-# Step 1: Convert PDF to an Image
-def pdf_to_image(pdf_path, page_number=0, output_image_path="output.png"):
-    """Converts a page of a PDF file to an image."""
-    doc = fitz.open(pdf_path)
-    page = doc.load_page(page_number)  # Load the specific page
-    pix = page.get_pixmap()
-    pix.save(output_image_path)  # Save the image
-    doc.close()
-    print(f"PDF page {page_number} saved as image at {output_image_path}.")
-    return output_image_path
-
-# Step 2: Upload the image to Gemini API
 def upload_to_gemini(path, mime_type="image/png"):
     """Uploads the given file to Gemini."""
     file = genai.upload_file(path, mime_type=mime_type)
@@ -21,12 +7,11 @@ def upload_to_gemini(path, mime_type="image/png"):
     return file
 
 def read_prompt_file(file_path):
-  """Reads the contents of a prompt file."""
-  with open(file_path, "r") as f:
-    prompt = f.read().strip()
-  return prompt
+    """Reads the contents of a prompt file."""
+    with open(file_path, "r") as f:
+        prompt = f.read().strip()
+    return prompt
 
-# Step 3: Process the file using Gemini API
 def extract_structured_data(image_file):
     """Extract structured data from the image using the Gemini API."""
     # Configure Gemini API
@@ -62,19 +47,7 @@ def extract_structured_data(image_file):
     ]
     chat_session = model.start_chat(history=history)
 
-
     # Send a message to get a response
     response = chat_session.send_message("Please process the uploaded image.")
     print("Extracted Data:\n", response.text)
     return response.text
-
-# Main script
-if __name__ == "__main__":
-    pdf_path = r"uploads\FT_XX_13-005_e_F.pdf"
-    output_image_path = pdf_to_image(pdf_path)
-
-    # Extract structured data from the image
-    structured_data = extract_structured_data(output_image_path)
-
-    # Output structured JSON
-    print("Structured JSON Output:", structured_data)
