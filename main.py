@@ -61,12 +61,16 @@ def extract_structured_data(image_file):
         }
     ]
     chat_session = model.start_chat(history=history)
+    response = chat_session.send_message("Please process the uploaded image.")
+    
+    
 
 
     # Send a message to get a response
     response = chat_session.send_message("Please process the uploaded image.")
-    print("Extracted Data:\n", response.text)
-    return response.text
+    print("Extracted Data:\n", response.text.encode('utf-8').decode('utf-8'))
+    # Decode the response properly
+    return response.text.encode('utf-8').decode('utf-8')
 
 # Main script
 if __name__ == "__main__":
