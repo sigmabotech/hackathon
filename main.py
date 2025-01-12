@@ -70,7 +70,7 @@ def extract_structured_data(image_file):
 
 # Main script
 if __name__ == "__main__":
-    pdf_path = "FT_XX_09-004_a_F.pdf"
+    pdf_path = r"uploads\FT_XX_13-005_e_F.pdf"
     output_image_path = pdf_to_image(pdf_path)
 
     # Extract structured data from the image
